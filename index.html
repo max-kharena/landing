@@ -885,41 +885,45 @@
 
     <div class="h-screen relative overflow-hidden">
 
-        <!-- Hash-style borders - fixed position -->
+        <!-- Hash-style borders - fixed position (decorative) -->
         <!-- Horizontal lines -->
-        <div class="fixed top-[30px] md:top-[45px] lg:top-[60px] left-0 right-0 h-[1px] border-line z-50"></div>
-        <div class="fixed bottom-[30px] md:bottom-[45px] lg:bottom-[60px] left-0 right-0 h-[1px] border-line z-50">
-        </div>
+        <div class="fixed top-[30px] md:top-[45px] lg:top-[60px] left-0 right-0 h-[1px] border-line z-50"
+            aria-hidden="true"></div>
+        <div class="fixed bottom-[30px] md:bottom-[45px] lg:bottom-[60px] left-0 right-0 h-[1px] border-line z-50"
+            aria-hidden="true"></div>
 
         <!-- Vertical lines -->
-        <div class="fixed top-0 bottom-0 left-[30px] md:left-[45px] lg:left-[60px] w-[1px] border-line z-50"></div>
-        <div class="fixed top-0 bottom-0 right-[30px] md:right-[45px] lg:right-[60px] w-[1px] border-line z-50"></div>
+        <div class="fixed top-0 bottom-0 left-[30px] md:left-[45px] lg:left-[60px] w-[1px] border-line z-50"
+            aria-hidden="true"></div>
+        <div class="fixed top-0 bottom-0 right-[30px] md:right-[45px] lg:right-[60px] w-[1px] border-line z-50"
+            aria-hidden="true"></div>
 
         <main class="h-full relative overflow-hidden">
 
-            <!-- Ambient glow effect -->
-            <div class="ambient-glow" style="top: -200px; right: -200px;"></div>
-            <div class="ambient-glow" style="bottom: -200px; left: -200px;"></div>
+            <!-- Ambient glow effect (decorative) -->
+            <div class="ambient-glow" style="top: -200px; right: -200px;" aria-hidden="true"></div>
+            <div class="ambient-glow" style="bottom: -200px; left: -200px;" aria-hidden="true"></div>
 
             <!-- Animated gradient ellipsoid - bottom right -->
-            <div class="gradient-ellipsoid"></div>
+            <div class="gradient-ellipsoid" aria-hidden="true"></div>
 
             <!-- Content -->
-            <div
+            <div id="main-content"
                 class="relative z-10 flex items-center h-full px-[50px] md:px-[70px] lg:px-[100px] py-[40px] md:py-[60px] lg:py-[80px]">
-                <div class="max-w-3xl">
+                <article class="max-w-3xl">
 
                     <!-- Title -->
-                    <div class="relative opacity-0 animate-in">
+                    <header class="relative opacity-0 animate-in">
                         <h1 class="title-creative">
                             <span class="title-bold-condensed">BLUE</span><span class="title-outline-text">FYN</span>
                         </h1>
-                    </div>
+                    </header>
 
                     <!-- Subtitle with typing effect -->
-                    <p
-                        class="mt-2 md:mt-3 text-sm md:text-base lg:text-lg text-muted leading-relaxed opacity-0 animate-in delay-1 font-terminal tracking-tight">
-                        <span id="typed-text" class="typing-text"></span><span class="typing-cursor" id="cursor"></span>
+                    <p class="mt-2 md:mt-3 text-sm md:text-base lg:text-lg text-muted leading-relaxed opacity-0 animate-in delay-1 font-terminal tracking-tight"
+                        aria-live="polite" aria-label="The AI-native operating system for fintech infrastructure">
+                        <span id="typed-text" class="typing-text"></span><span class="typing-cursor" id="cursor"
+                            aria-hidden="true"></span>
                     </p>
 
                     <!-- CTA Button -->
@@ -976,24 +980,27 @@
                         </div>
                     </div>
 
-                </div>
+                </article>
             </div>
 
         </main>
 
-        <!-- Tagline - bottom left -->
-        <div
-            class="fixed bottom-[6px] left-[40px] md:bottom-[12px] md:left-[65px] lg:bottom-[18px] lg:left-[80px] z-50 max-w-[45%] sm:max-w-[200px] md:max-w-[280px] lg:max-w-[350px]">
-            <p
-                class="text-muted text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-terminal leading-tight opacity-70">
-                Take back control of your fintech stack and keep ownership of your flow of funds</p>
-        </div>
+        <!-- Footer -->
+        <footer class="fixed bottom-0 left-0 right-0 z-50 pointer-events-none" role="contentinfo">
+            <!-- Tagline - bottom left -->
+            <div
+                class="absolute bottom-[6px] left-[40px] md:bottom-[12px] md:left-[65px] lg:bottom-[18px] lg:left-[80px] max-w-[45%] sm:max-w-[200px] md:max-w-[280px] lg:max-w-[350px]">
+                <p
+                    class="text-muted text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-terminal leading-tight opacity-70">
+                    Take back control of your fintech stack and keep ownership of your flow of funds</p>
+            </div>
 
-        <!-- Copyright -->
-        <div
-            class="fixed bottom-[8px] right-[50px] md:bottom-[12px] md:right-[65px] lg:bottom-[18px] lg:right-[80px] z-50">
-            <p class="text-muted text-xs font-terminal">© 2025 BLUEFYN</p>
-        </div>
+            <!-- Copyright -->
+            <div
+                class="absolute bottom-[8px] right-[50px] md:bottom-[12px] md:right-[65px] lg:bottom-[18px] lg:right-[80px]">
+                <p class="text-muted text-xs font-terminal"><span aria-label="Copyright">©</span> 2025 BLUEFYN</p>
+            </div>
+        </footer>
     </div>
 
     <script>
