@@ -29,7 +29,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
 
     <script>
@@ -40,6 +40,8 @@
                         'display': ['Space Mono', 'monospace'],
                         'body': ['Instrument Sans', 'sans-serif'],
                         'terminal': ['JetBrains Mono', 'monospace'],
+                        'headline': ['Bebas Neue', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
                     },
                 }
             }
@@ -580,6 +582,204 @@
         .delay-3 {
             animation-delay: 0.3s;
         }
+
+        /* Creative title styles */
+        .title-creative {
+            font-size: clamp(4rem, 12vw, 10rem);
+            line-height: 1;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .title-bold-condensed {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+            color: var(--text-color);
+            letter-spacing: 0.02em;
+        }
+
+        .title-letter-e {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+            color: var(--text-color);
+            letter-spacing: 0.02em;
+            position: relative;
+        }
+
+        .title-letter-l {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+            color: var(--text-color);
+            letter-spacing: 0.02em;
+        }
+
+        .title-long-line {
+            display: inline-block;
+            width: clamp(33px, 4vw, 100px);
+            height: clamp(8px, 1vw, 10px);
+            background: var(--text-color);
+            vertical-align: baseline;
+            margin-left: -0.12em;
+            margin-right: 3px;
+            position: relative;
+            top: -14px;
+        }
+
+        .title-outline-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text-color);
+            text-stroke: 1.5px var(--text-color);
+            letter-spacing: 0.02em;
+        }
+
+        .title-serif {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--text-color);
+            letter-spacing: -0.02em;
+        }
+
+        .title-bold {
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .title-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-color);
+            text-stroke: 1px var(--text-color);
+            opacity: 0.4;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(8px, 8px);
+            z-index: -1;
+        }
+
+        .title-main {
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .title-outline-inline {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text-color);
+            text-stroke: 1.5px var(--text-color);
+        }
+
+        .light-mode .title-outline-inline {
+            -webkit-text-stroke: 1.5px var(--text-color);
+            text-stroke: 1.5px var(--text-color);
+        }
+
+        /* Floating decorative elements */
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .circle-1 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00D9FF 0%, #0066FF 100%);
+            top: 10%;
+            left: 5%;
+            animation: floatBounce 6s ease-in-out infinite;
+        }
+
+        .circle-2 {
+            width: 12px;
+            height: 12px;
+            background: var(--text-color);
+            top: 30%;
+            right: 25%;
+            animation: floatBounce 8s ease-in-out infinite reverse;
+        }
+
+        .circle-3 {
+            width: 6px;
+            height: 6px;
+            background: #FF3D71;
+            bottom: 35%;
+            left: 15%;
+            animation: floatBounce 5s ease-in-out infinite;
+        }
+
+        @keyframes floatBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
+        }
+
+        /* Decorative line */
+        .deco-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--text-color), transparent);
+            opacity: 0.3;
+        }
+
+        /* Star sparkle */
+        .sparkle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            animation: sparkleAnim 3s ease-in-out infinite;
+        }
+
+        .sparkle::before,
+        .sparkle::after {
+            content: '';
+            position: absolute;
+            background: var(--text-color);
+        }
+
+        .sparkle::before {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .sparkle::after {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes sparkleAnim {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(0.5) rotate(45deg);
+                opacity: 0.5;
+            }
+        }
+
+        .light-mode .title-outline {
+            -webkit-text-stroke: 1px var(--text-color);
+            text-stroke: 1px var(--text-color);
+        }
     </style>
 
     <!-- Structured Data -->
@@ -641,17 +841,18 @@
             <!-- Content -->
             <div
                 class="relative z-10 flex items-center h-full min-h-screen px-[50px] md:px-[70px] lg:px-[100px] py-[50px] md:py-[70px] lg:py-[100px]">
-                <div class="max-w-xl">
+                <div class="max-w-3xl">
 
                     <!-- Title -->
-                    <h1
-                        class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight opacity-0 animate-in">
-                        BLUEFYN
-                    </h1>
+                    <div class="relative opacity-0 animate-in">
+                        <h1 class="title-creative">
+                            <span class="title-bold-condensed">BLUE</span><span class="title-outline-text">FYN</span>
+                        </h1>
+                    </div>
 
                     <!-- Subtitle with typing effect -->
                     <p
-                        class="mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-muted leading-relaxed opacity-0 animate-in delay-1 font-terminal tracking-tight">
+                        class="mt-2 md:mt-3 text-base md:text-lg lg:text-xl text-muted leading-relaxed opacity-0 animate-in delay-1 font-terminal tracking-tight">
                         <span id="typed-text" class="typing-text"></span><span class="typing-cursor" id="cursor"></span>
                     </p>
 
