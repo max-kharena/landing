@@ -10,6 +10,7 @@
         content="fintech, AI, artificial intelligence, financial infrastructure, operating system, fintech platform">
     <meta name="author" content="BLUEFYN">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#000000">
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
@@ -49,6 +50,52 @@
     </script>
 
     <style>
+        /* Skip link for keyboard navigation */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            z-index: 1000;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .gradient-ellipsoid {
+                animation: none !important;
+            }
+
+            .typing-cursor {
+                animation: none !important;
+                opacity: 1;
+            }
+        }
+
+        /* Focus visible styles */
+        :focus-visible {
+            outline: 2px solid var(--gradient-mid);
+            outline-offset: 2px;
+        }
+
         :root {
             --gradient-start: #00D9FF;
             --gradient-mid: #7B61FF;
@@ -811,8 +858,11 @@
 </head>
 
 <body class="min-h-screen font-body">
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark and light theme">
         <svg class="moon-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
@@ -935,7 +985,7 @@
         <div
             class="fixed bottom-[6px] left-[40px] md:bottom-[12px] md:left-[65px] lg:bottom-[18px] lg:left-[80px] z-50 max-w-[45%] sm:max-w-[200px] md:max-w-[280px] lg:max-w-[350px]">
             <p
-                class="text-muted text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-terminal leading-tight opacity-50">
+                class="text-muted text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-terminal leading-tight opacity-70">
                 Take back control of your fintech stack and keep ownership of your flow of funds</p>
         </div>
 
