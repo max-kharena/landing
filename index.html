@@ -173,18 +173,15 @@
             height: 32px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
-            background: transparent;
+            background: var(--bg-color);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            /* Center in top-right corner: (30px border offset / 2) - (button size / 2) */
-            top: 15px;
-            right: 15px;
-            transform: translate(50%, -50%);
             top: 30px;
             right: 30px;
+            transform: translate(50%, -50%);
         }
 
         @media (min-width: 768px) {
@@ -235,9 +232,9 @@
         }
 
         .form-container.open {
-            max-height: 300px;
+            max-height: 280px;
             opacity: 1;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .success-state {
@@ -583,6 +580,23 @@
             animation-delay: 0.3s;
         }
 
+        /* Typo underline for fyntech */
+        .typo-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .typo-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 3px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 3 Q5 0 10 3 T20 3' stroke='%23FF3D71' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+            background-size: 8px 3px;
+        }
+
         /* Creative title styles */
         .title-creative {
             font-size: clamp(4rem, 12vw, 10rem);
@@ -819,18 +833,19 @@
         </svg>
     </button>
 
-    <div class="min-h-screen relative">
+    <div class="h-screen relative overflow-hidden">
 
-        <!-- Hash-style borders - responsive -->
+        <!-- Hash-style borders - fixed position -->
         <!-- Horizontal lines -->
-        <div class="absolute top-[30px] md:top-[45px] lg:top-[60px] left-0 right-0 h-[1px] border-line"></div>
-        <div class="absolute bottom-[30px] md:bottom-[45px] lg:bottom-[60px] left-0 right-0 h-[1px] border-line"></div>
+        <div class="fixed top-[30px] md:top-[45px] lg:top-[60px] left-0 right-0 h-[1px] border-line z-50"></div>
+        <div class="fixed bottom-[30px] md:bottom-[45px] lg:bottom-[60px] left-0 right-0 h-[1px] border-line z-50">
+        </div>
 
         <!-- Vertical lines -->
-        <div class="absolute top-0 bottom-0 left-[30px] md:left-[45px] lg:left-[60px] w-[1px] border-line"></div>
-        <div class="absolute top-0 bottom-0 right-[30px] md:right-[45px] lg:right-[60px] w-[1px] border-line"></div>
+        <div class="fixed top-0 bottom-0 left-[30px] md:left-[45px] lg:left-[60px] w-[1px] border-line z-50"></div>
+        <div class="fixed top-0 bottom-0 right-[30px] md:right-[45px] lg:right-[60px] w-[1px] border-line z-50"></div>
 
-        <main class="h-full min-h-screen relative overflow-hidden">
+        <main class="h-full relative overflow-hidden">
 
             <!-- Ambient glow effect -->
             <div class="ambient-glow" style="top: -200px; right: -200px;"></div>
@@ -841,7 +856,7 @@
 
             <!-- Content -->
             <div
-                class="relative z-10 flex items-center h-full min-h-screen px-[50px] md:px-[70px] lg:px-[100px] py-[50px] md:py-[70px] lg:py-[100px]">
+                class="relative z-10 flex items-center h-full px-[50px] md:px-[70px] lg:px-[100px] py-[40px] md:py-[60px] lg:py-[80px]">
                 <div class="max-w-3xl">
 
                     <!-- Title -->
@@ -853,24 +868,24 @@
 
                     <!-- Subtitle with typing effect -->
                     <p
-                        class="mt-2 md:mt-3 text-base md:text-lg lg:text-xl text-muted leading-relaxed opacity-0 animate-in delay-1 font-terminal tracking-tight">
+                        class="mt-2 md:mt-3 text-sm md:text-base lg:text-lg text-muted leading-relaxed opacity-0 animate-in delay-1 font-terminal tracking-tight">
                         <span id="typed-text" class="typing-text"></span><span class="typing-cursor" id="cursor"></span>
                     </p>
 
                     <!-- CTA Button -->
                     <button id="cta-btn"
-                        class="btn-primary mt-8 md:mt-10 px-6 md:px-8 py-3 md:py-4 font-display text-xs md:text-sm tracking-wider uppercase opacity-0 animate-in delay-2"
+                        class="btn-primary mt-6 md:mt-8 px-5 md:px-6 py-2.5 md:py-3 font-display text-xs md:text-sm tracking-wider uppercase opacity-0 animate-in delay-2"
                         aria-expanded="false" aria-controls="waitlist-form">
                         Join the waitlist
                     </button>
 
                     <!-- Form -->
                     <div id="waitlist-form" class="form-container" role="region" aria-label="Waitlist signup form">
-                        <form id="signup-form" class="form-inner space-y-4 max-w-md" novalidate>
+                        <form id="signup-form" class="form-inner space-y-3 max-w-md" novalidate>
                             <div>
                                 <label for="name" class="sr-only">Full Name</label>
                                 <input type="text" id="name" name="name" placeholder="Name" required minlength="2"
-                                    autocomplete="name" class="w-full px-4 py-3 font-body text-sm">
+                                    autocomplete="name" class="w-full px-3 py-2.5 font-body text-sm">
                                 <p class="error-message text-xs mt-1 font-terminal hidden" style="color: #FF3D71;">Name
                                     is required</p>
                             </div>
@@ -878,7 +893,7 @@
                                 <label for="company" class="sr-only">Company</label>
                                 <input type="text" id="company" name="company" placeholder="Company" required
                                     minlength="2" autocomplete="organization"
-                                    class="w-full px-4 py-3 font-body text-sm">
+                                    class="w-full px-3 py-2.5 font-body text-sm">
                                 <p class="error-message text-xs mt-1 font-terminal hidden" style="color: #FF3D71;">
                                     Company is required</p>
                             </div>
@@ -886,12 +901,12 @@
                                 <label for="email" class="sr-only">Email Address</label>
                                 <input type="email" id="email" name="email" placeholder="Email" required
                                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autocomplete="email"
-                                    class="w-full px-4 py-3 font-body text-sm">
+                                    class="w-full px-3 py-2.5 font-body text-sm">
                                 <p class="error-message text-xs mt-1 font-terminal hidden" style="color: #FF3D71;">Valid
                                     email is required</p>
                             </div>
                             <button type="submit"
-                                class="btn-primary w-full px-8 py-4 font-display text-sm tracking-wider uppercase mt-2">
+                                class="btn-primary w-full px-6 py-2.5 font-display text-sm tracking-wider uppercase mt-1">
                                 Get early access
                             </button>
                         </form>
@@ -916,9 +931,16 @@
 
         </main>
 
+        <!-- Tagline - bottom left -->
+        <div
+            class="fixed bottom-[8px] left-[50px] md:bottom-[12px] md:left-[65px] lg:bottom-[18px] lg:left-[80px] z-50 max-w-[200px] md:max-w-[280px] lg:max-w-[350px]">
+            <p class="text-muted text-[10px] md:text-xs font-terminal leading-tight">Take back control of your fintech
+                stack and keep ownership of your flow of funds</p>
+        </div>
+
         <!-- Copyright -->
         <div
-            class="fixed bottom-[8px] right-[50px] md:bottom-[12px] md:right-[65px] lg:bottom-[18px] lg:right-[80px] z-10">
+            class="fixed bottom-[8px] right-[50px] md:bottom-[12px] md:right-[65px] lg:bottom-[18px] lg:right-[80px] z-50">
             <p class="text-muted text-xs font-terminal">© 2025 BLUEFYN</p>
         </div>
     </div>
@@ -933,13 +955,13 @@
             const sequences = [
                 { text: 'The ', type: 'type', delay: 40 },
                 { text: '<span class="ai-gradient font-semibold">AI</span>', type: 'html', delay: 50 },
-                { text: '-native operating system for f', type: 'type', delay: 25 },
-                { text: '<span style="text-decoration: underline wavy #FF3D71; text-underline-offset: 4px;">y</span>', type: 'html', delay: 120 },
-                { text: 'ntech', type: 'type', delay: 80 },
-                { pause: 200 },
-                { deleteHtml: true, delay: 20 },
-                { delete: 5, delay: 20 },
-                { text: 'intech', type: 'type', delay: 30 },
+                { text: '-native operating system for ', type: 'type', delay: 25 },
+                { text: '<span class="typo-underline">', type: 'html', delay: 0 },
+                { text: 'fyntech', type: 'type', delay: 60 },
+                { text: '</span>', type: 'html', delay: 0 },
+                { pause: 400 },
+                { deleteChars: 7, delay: 35 },
+                { text: 'fintech', type: 'type', delay: 45 },
                 { text: ' infrastructure.', type: 'type', delay: 25 }
             ];
 
@@ -963,11 +985,50 @@
                 }
 
                 if (current.deleteHtml) {
-                    // Remove the wavy underlined y span entirely
-                    currentHTML = currentHTML.replace('<span style="text-decoration: underline wavy #FF3D71; text-underline-offset: 4px;">y</span>', '');
+                    // Remove the wavy underlined fyntech span entirely
+                    currentHTML = currentHTML.replace('<span class="typo-underline">fyntech</span>', '');
                     typedText.innerHTML = currentHTML;
                     sequenceIndex++;
                     setTimeout(typeNextChar, current.delay);
+                    return;
+                }
+
+                if (current.deleteChars) {
+                    if (charIndex < current.deleteChars) {
+                        // Remove last character, handling the closing span tag
+                        if (currentHTML.endsWith('</span>')) {
+                            currentHTML = currentHTML.slice(0, -7); // Remove </span>
+                        }
+                        // Find and remove last character before any closing tag
+                        const lastCharIndex = currentHTML.length - 1;
+                        currentHTML = currentHTML.slice(0, lastCharIndex);
+
+                        // Re-add closing span if we're still in the underlined section
+                        if (currentHTML.includes('<span class="typo-underline">') && !currentHTML.endsWith('</span>')) {
+                            // Check if there's content after the opening tag
+                            const openTagEnd = currentHTML.indexOf('<span class="typo-underline">') + '<span class="typo-underline">'.length;
+                            if (currentHTML.length > openTagEnd) {
+                                typedText.innerHTML = currentHTML + '</span>';
+                            } else {
+                                // Remove empty span
+                                currentHTML = currentHTML.replace('<span class="typo-underline">', '');
+                                typedText.innerHTML = currentHTML;
+                            }
+                        } else {
+                            typedText.innerHTML = currentHTML;
+                        }
+
+                        charIndex++;
+                        setTimeout(typeNextChar, current.delay);
+                    } else {
+                        // Clean up any remaining empty span
+                        currentHTML = currentHTML.replace('<span class="typo-underline"></span>', '');
+                        currentHTML = currentHTML.replace('<span class="typo-underline">', '');
+                        typedText.innerHTML = currentHTML;
+                        charIndex = 0;
+                        sequenceIndex++;
+                        typeNextChar();
+                    }
                     return;
                 }
 
