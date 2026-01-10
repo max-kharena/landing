@@ -591,10 +591,10 @@
             position: absolute;
             left: 0;
             right: 0;
-            bottom: -2px;
-            height: 3px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 3 Q5 0 10 3 T20 3' stroke='%23FF3D71' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
-            background-size: 8px 3px;
+            bottom: 0px;
+            height: 2px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 2 Q5 0 10 2 T20 2' stroke='%23FF3D71' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+            background-size: 6px 2px;
         }
 
         /* Creative title styles */
@@ -933,9 +933,10 @@
 
         <!-- Tagline - bottom left -->
         <div
-            class="fixed bottom-[8px] left-[50px] md:bottom-[12px] md:left-[65px] lg:bottom-[18px] lg:left-[80px] z-50 max-w-[200px] md:max-w-[280px] lg:max-w-[350px]">
-            <p class="text-muted text-[10px] md:text-xs font-terminal leading-tight">Take back control of your fintech
-                stack and keep ownership of your flow of funds</p>
+            class="fixed bottom-[6px] left-[40px] md:bottom-[12px] md:left-[65px] lg:bottom-[18px] lg:left-[80px] z-50 max-w-[45%] sm:max-w-[200px] md:max-w-[280px] lg:max-w-[350px]">
+            <p
+                class="text-muted text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-terminal leading-tight opacity-50">
+                Take back control of your fintech stack and keep ownership of your flow of funds</p>
         </div>
 
         <!-- Copyright -->
@@ -955,14 +956,17 @@
             const sequences = [
                 { text: 'The ', type: 'type', delay: 40 },
                 { text: '<span class="ai-gradient font-semibold">AI</span>', type: 'html', delay: 50 },
-                { text: '-native operating system for ', type: 'type', delay: 25 },
-                { text: '<span class="typo-underline">', type: 'html', delay: 0 },
+                { text: '-native operating system', type: 'type', delay: 25 },
+                { text: '<br class="sm:hidden">', type: 'html', delay: 0 },
+                { text: ' for ', type: 'type', delay: 25 },
+                { text: '<span class="whitespace-nowrap"><span class="typo-underline">', type: 'html', delay: 0 },
                 { text: 'fyntech', type: 'type', delay: 60 },
-                { text: '</span>', type: 'html', delay: 0 },
+                { text: '</span></span>', type: 'html', delay: 0 },
                 { pause: 400 },
                 { deleteChars: 7, delay: 35 },
+                { text: '<span class="whitespace-nowrap">', type: 'html', delay: 0 },
                 { text: 'fintech', type: 'type', delay: 45 },
-                { text: ' infrastructure.', type: 'type', delay: 25 }
+                { text: ' infrastructure.</span>', type: 'type', delay: 25 }
             ];
 
             let currentHTML = '';
@@ -995,35 +999,42 @@
 
                 if (current.deleteChars) {
                     if (charIndex < current.deleteChars) {
-                        // Remove last character, handling the closing span tag
-                        if (currentHTML.endsWith('</span>')) {
-                            currentHTML = currentHTML.slice(0, -7); // Remove </span>
+                        // Remove closing spans first
+                        let tempHTML = currentHTML;
+                        if (tempHTML.endsWith('</span></span>')) {
+                            tempHTML = tempHTML.slice(0, -14);
+                        } else if (tempHTML.endsWith('</span>')) {
+                            tempHTML = tempHTML.slice(0, -7);
                         }
-                        // Find and remove last character before any closing tag
-                        const lastCharIndex = currentHTML.length - 1;
-                        currentHTML = currentHTML.slice(0, lastCharIndex);
 
-                        // Re-add closing span if we're still in the underlined section
-                        if (currentHTML.includes('<span class="typo-underline">') && !currentHTML.endsWith('</span>')) {
-                            // Check if there's content after the opening tag
-                            const openTagEnd = currentHTML.indexOf('<span class="typo-underline">') + '<span class="typo-underline">'.length;
-                            if (currentHTML.length > openTagEnd) {
-                                typedText.innerHTML = currentHTML + '</span>';
+                        // Remove last character
+                        tempHTML = tempHTML.slice(0, -1);
+
+                        // Check if we still have content in the typo-underline span
+                        const typoOpenTag = '<span class="typo-underline">';
+                        const typoIndex = tempHTML.lastIndexOf(typoOpenTag);
+
+                        if (typoIndex !== -1) {
+                            const afterTag = tempHTML.slice(typoIndex + typoOpenTag.length);
+                            if (afterTag.length > 0) {
+                                currentHTML = tempHTML + '</span></span>';
                             } else {
-                                // Remove empty span
-                                currentHTML = currentHTML.replace('<span class="typo-underline">', '');
-                                typedText.innerHTML = currentHTML;
+                                // Remove empty spans
+                                currentHTML = tempHTML.slice(0, typoIndex);
+                                // Also remove the whitespace-nowrap opening
+                                currentHTML = currentHTML.replace('<span class="whitespace-nowrap">', '');
                             }
                         } else {
-                            typedText.innerHTML = currentHTML;
+                            currentHTML = tempHTML;
                         }
 
+                        typedText.innerHTML = currentHTML;
                         charIndex++;
                         setTimeout(typeNextChar, current.delay);
                     } else {
-                        // Clean up any remaining empty span
-                        currentHTML = currentHTML.replace('<span class="typo-underline"></span>', '');
-                        currentHTML = currentHTML.replace('<span class="typo-underline">', '');
+                        // Clean up any remaining spans
+                        currentHTML = currentHTML.replace(/<span class="typo-underline"><\/span>/g, '');
+                        currentHTML = currentHTML.replace(/<span class="whitespace-nowrap"><\/span>/g, '');
                         typedText.innerHTML = currentHTML;
                         charIndex = 0;
                         sequenceIndex++;
