@@ -1,0 +1,201 @@
+---
+interface Props {
+  variant?: 'default' | 'ai' | 'status';
+  className?: string;
+}
+
+const { variant = 'default', className = '' } = Astro.props;
+---
+
+<div class={`liquid-glass-badge ${variant} ${className}`}>
+  <div class="glass-layer"></div>
+  <div class="glass-shine"></div>
+  <div class="glass-border"></div>
+  <div class="badge-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .liquid-glass-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 100px;
+    isolation: isolate;
+  }
+
+  /* Base glass layer - frosted effect */
+  .glass-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    z-index: 1;
+  }
+
+  /* Top shine/specular highlight */
+  .glass-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.08) 25%,
+      transparent 50%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Subtle animated border */
+  .glass-border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.1) 30%,
+      rgba(255, 255, 255, 0.05) 70%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: 3;
+  }
+
+  /* Content container */
+  .badge-content {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  /* AI variant - with vibrant gradient glow (2026 AI colors) */
+  .liquid-glass-badge.ai .glass-layer {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 245, 255, 0.12) 0%,
+      rgba(168, 85, 247, 0.1) 50%,
+      rgba(240, 171, 252, 0.08) 100%
+    );
+  }
+
+  .liquid-glass-badge.ai .glass-border {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 245, 255, 0.8) 0%,
+      rgba(168, 85, 247, 0.7) 25%,
+      rgba(240, 171, 252, 0.7) 50%,
+      rgba(56, 189, 248, 0.7) 75%,
+      rgba(0, 245, 255, 0.8) 100%
+    );
+    background-size: 200% 200%;
+    animation: border-glow 3s ease infinite;
+  }
+
+  .liquid-glass-badge.ai::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 245, 255, 0.4) 0%,
+      rgba(168, 85, 247, 0.35) 50%,
+      rgba(56, 189, 248, 0.4) 100%
+    );
+    filter: blur(16px);
+    opacity: 0.7;
+    z-index: 0;
+    animation: glow-pulse 2.5s ease-in-out infinite;
+  }
+
+  /* Status variant - with green dot */
+  .liquid-glass-badge.status .glass-layer {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  }
+
+  .liquid-glass-badge.status .glass-border {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.25) 100%
+    );
+  }
+
+  /* Hover effects */
+  .liquid-glass-badge {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .liquid-glass-badge.ai,
+  .liquid-glass-badge.status {
+    cursor: pointer;
+  }
+
+  .liquid-glass-badge:hover {
+    transform: translateY(-1px);
+  }
+
+  .liquid-glass-badge.ai:hover::before {
+    opacity: 0.8;
+  }
+
+  /* Animations */
+  @keyframes border-glow {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.02);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .liquid-glass-badge.ai .glass-border,
+    .liquid-glass-badge.ai::before {
+      animation: none;
+    }
+  }
+</style>

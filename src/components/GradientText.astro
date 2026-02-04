@@ -1,0 +1,58 @@
+---
+interface Props {
+  colors?: string[];
+  animationSpeed?: number;
+  className?: string;
+}
+
+const {
+  colors = ['#00f5ff', '#a855f7', '#f0abfc', '#38bdf8', '#00f5ff'],
+  animationSpeed = 8,
+  className = ''
+} = Astro.props;
+
+const gradientColors = colors.join(', ');
+const duration = `${animationSpeed}s`;
+---
+
+<span class={`gradient-text ${className}`} style={`--gradient-colors: ${gradientColors}; --animation-duration: ${duration};`}>
+  <slot />
+</span>
+
+<style>
+  .gradient-text {
+    background: linear-gradient(
+      90deg,
+      var(--gradient-colors)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift var(--animation-duration) ease infinite;
+  }
+
+  /* AI text specific styling */
+  .gradient-text.ai-text {
+    filter: brightness(1.2) saturate(1.2);
+    text-shadow:
+      0 0 20px rgba(0, 245, 255, 0.3),
+      0 0 40px rgba(168, 85, 247, 0.2);
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-text {
+      animation: none;
+      background-position: 0% 50%;
+    }
+  }
+</style>

@@ -1,0 +1,31 @@
+{
+  "name": "landing",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/tailwind": "^6.0.0",
+    "@types/react": "^19.2.11",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^5.2.0",
+    "mathjs": "^15.1.0",
+    "motion": "^12.31.0",
+    "ogl": "^1.0.11",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^3.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/max-kharena/landing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/max-kharena/landing/issues"
+  },
+  "homepage": "https://github.com/max-kharena/landing#readme"
+}

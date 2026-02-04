@@ -1,0 +1,401 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TextType from '../components/TextType.astro';
+import GradientText from '../components/GradientText.astro';
+import LiquidGlassBadge from '../components/LiquidGlassBadge.astro';
+import Grainient from '../components/Grainient';
+import DecryptedText from '../components/DecryptedText';
+import GlassSurface from '../components/GlassSurface';
+import GradualBlur from '../components/GradualBlur';
+import '../styles/global.css';
+---
+
+<Layout title="Bluefyn | AI-Native Fintech Infrastructure" description="The AI-native operating system for fintech infrastructure. Join the waitlist for early access to the future of financial technology.">
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="min-h-screen relative overflow-x-hidden flex flex-col">
+        <!-- Grainient Background -->
+        <div class="grainient-bg" aria-hidden="true">
+            <Grainient
+                client:load
+                color1="#000000"
+                color2="#758cff"
+                color3="#2f23d1"
+                timeSpeed={0.25}
+                colorBalance={0}
+                warpStrength={1}
+                warpFrequency={5}
+                warpSpeed={3.3}
+                warpAmplitude={50}
+                blendAngle={0}
+                blendSoftness={0.05}
+                rotationAmount={500}
+                noiseScale={2}
+                grainAmount={0.1}
+                grainScale={2}
+                grainAnimated={false}
+                contrast={1.5}
+                gamma={1}
+                saturation={1}
+                centerX={0}
+                centerY={0}
+                zoom={0.9}
+            />
+        </div>
+
+
+        <!-- Header blur effect -->
+        <GradualBlur
+            client:load
+            position="top"
+            target="page"
+            height="5rem"
+            strength={1.5}
+            divCount={6}
+            curve="ease-out"
+            opacity={0.9}
+            zIndex={40}
+        />
+
+        <!-- Header -->
+        <header class="fixed top-0 left-0 right-0 z-[200] px-6 md:px-12 py-6">
+            <nav class="max-w-7xl mx-auto flex items-center justify-between">
+                <GlassSurface
+                    client:load
+                    width="auto"
+                    height="auto"
+                    borderRadius={50}
+                    brightness={50}
+                    opacity={0.93}
+                    blur={11}
+                    className="logo-badge"
+                >
+                    <a href="/" class="logo" aria-label="Bluefyn Home">
+                        <span>Bluefyn</span>
+                    </a>
+                </GlassSurface>
+                <GlassSurface
+                    client:load
+                    width="auto"
+                    height="auto"
+                    borderRadius={50}
+                    brightness={50}
+                    opacity={0.93}
+                    blur={11}
+                    className="coming-soon-badge"
+                >
+                    <span class="status-dot"></span>
+                    <DecryptedText
+                        client:load
+                        text="Coming Soon"
+                        animateOn="hover"
+                        speed={40}
+                        maxIterations={12}
+                    />
+                </GlassSurface>
+            </nav>
+        </header>
+
+        <!-- Main Content - Centered Apple Style -->
+        <main id="main-content" class="relative z-10 flex-1 flex flex-col items-center justify-center px-6 md:px-12 py-32">
+            <article class="max-w-4xl mx-auto text-center">
+                <!-- Badge -->
+                <div class="mb-8">
+                    <GlassSurface
+                        client:load
+                        width="auto"
+                        height="auto"
+                        borderRadius={50}
+                        brightness={50}
+                        opacity={0.93}
+                        blur={11}
+                        className="ai-badge"
+                    >
+                        <svg class="w-4 h-4 flex-shrink-0 ai-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <GradientText
+                            colors={['#00f5ff', '#a855f7', '#f0abfc', '#38bdf8', '#00f5ff']}
+                            animationSpeed={4}
+                            className="ai-text"
+                        >
+                            <DecryptedText
+                                client:load
+                                text="AI-Powered Infrastructure"
+                                animateOn="hover"
+                                speed={40}
+                                maxIterations={12}
+                            />
+                        </GradientText>
+                    </GlassSurface>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="mt-4">
+                    <TextType />
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="subheadline mx-auto mt-2">
+                    The unified control plane for vendor economics, operations, and governance.
+                    Built for modern fintech teams.
+                </p>
+
+                <!-- CTA Button -->
+                <div class="flex items-center justify-center mt-10 md:mt-12">
+                    <GlassSurface
+                        client:load
+                        width="auto"
+                        height="auto"
+                        borderRadius={50}
+                        brightness={45}
+                        opacity={0.95}
+                        blur={14}
+                        className="cta-btn-glass"
+                    >
+                        <button id="cta-btn" class="cta-btn-inner" aria-expanded="false" aria-controls="waitlist-form">
+                            <span>Request access</span>
+                            <svg class="w-5 h-5 cta-sparkle-icon" fill="none" viewBox="0 0 24 24">
+                                <defs>
+                                    <linearGradient id="sparkle-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#00f5ff">
+                                            <animate attributeName="stop-color" values="#00f5ff;#a855f7;#f0abfc;#38bdf8;#00f5ff" dur="4s" repeatCount="indefinite" />
+                                        </stop>
+                                        <stop offset="50%" stop-color="#a855f7">
+                                            <animate attributeName="stop-color" values="#a855f7;#f0abfc;#38bdf8;#00f5ff;#a855f7" dur="4s" repeatCount="indefinite" />
+                                        </stop>
+                                        <stop offset="100%" stop-color="#f0abfc">
+                                            <animate attributeName="stop-color" values="#f0abfc;#38bdf8;#00f5ff;#a855f7;#f0abfc" dur="4s" repeatCount="indefinite" />
+                                        </stop>
+                                    </linearGradient>
+                                </defs>
+                                <path stroke="url(#sparkle-gradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+                            </svg>
+                        </button>
+                    </GlassSurface>
+                </div>
+
+                <!-- Form -->
+                <div id="waitlist-form" class="form-container max-w-md mx-auto" role="region" aria-label="Waitlist signup form">
+                    <GlassSurface
+                        client:load
+                        width="100%"
+                        height="auto"
+                        borderRadius={22}
+                        brightness={50}
+                        opacity={0.93}
+                        blur={11}
+                        className="form-glass"
+                    >
+                        <form id="signup-form" class="form-inner space-y-4 w-full" novalidate>
+                            <div class="form-field">
+                                <label for="name" class="sr-only">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name *" required minlength="2" autocomplete="name" class="form-input">
+                                <p class="error-message text-xs mt-2 text-red-400 hidden" data-empty="Please enter your name" data-invalid="Name must be at least 2 characters">Please enter your name</p>
+                            </div>
+                            <div class="form-field">
+                                <label for="company" class="sr-only">Company</label>
+                                <input type="text" id="company" name="company" placeholder="Company *" required minlength="2" autocomplete="organization" class="form-input">
+                                <p class="error-message text-xs mt-2 text-red-400 hidden" data-empty="Please enter your company name" data-invalid="Company name must be at least 2 characters">Please enter your company name</p>
+                            </div>
+                            <div class="form-field">
+                                <label for="email" class="sr-only">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Work email *" required autocomplete="email" class="form-input">
+                                <p class="error-message text-xs mt-2 text-red-400 hidden" data-empty="Please enter your email" data-invalid="Please enter a valid email address" data-personal="Please use your work email">Please enter your email</p>
+                            </div>
+                            <GlassSurface
+                                client:load
+                                width="100%"
+                                height="auto"
+                                borderRadius={12}
+                                brightness={45}
+                                opacity={0.95}
+                                blur={14}
+                                className="submit-btn-glass"
+                            >
+                                <button type="submit" id="submit-btn" class="submit-btn-inner">
+                                    <span class="btn-text">Submit</span>
+                                </button>
+                            </GlassSurface>
+                        </form>
+
+                        <!-- Success State -->
+                        <div class="success-state flex-col items-center justify-center gap-3 py-8 w-full" id="success-message">
+                            <div class="liquid-glass-checkmark">
+                                <div class="checkmark-glow"></div>
+                                <div class="checkmark-glass"></div>
+                                <div class="checkmark-shine"></div>
+                                <div class="checkmark-border"></div>
+                                <div class="checkmark-icon">
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-lg font-medium mt-2">You're on the list!</p>
+                            <p class="text-sm text-[var(--text-muted)]">We'll be in touch soon.</p>
+                        </div>
+                    </GlassSurface>
+                </div>
+
+            </article>
+        </main>
+
+        <!-- Footer -->
+        <footer class="relative z-50 px-6 md:px-12 py-6 mt-auto">
+            <div class="max-w-7xl mx-auto flex items-center justify-center">
+                <p class="footer-text">
+                    © 2026 Bluefyn. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Form handling
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctaBtn = document.getElementById('cta-btn');
+            const formContainer = document.getElementById('waitlist-form');
+            const form = document.getElementById('signup-form');
+            const successMessage = document.getElementById('success-message');
+            ctaBtn?.addEventListener('click', function () {
+                const isOpen = formContainer?.classList.contains('open');
+                const ctaBtnWrapper = ctaBtn.closest('.cta-btn-glass');
+
+                if (!isOpen && formContainer) {
+                    formContainer.classList.add('open');
+                    ctaBtn.setAttribute('aria-expanded', 'true');
+                    if (ctaBtnWrapper) {
+                        (ctaBtnWrapper as HTMLElement).style.display = 'none';
+                    }
+
+                    // Animate scroll alongside form expansion
+                    const duration = 500;
+                    const startTime = performance.now();
+                    const startScroll = window.scrollY;
+
+                    const animateScroll = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        // Ease out cubic for smooth deceleration
+                        const ease = 1 - Math.pow(1 - progress, 3);
+
+                        // Get current scroll height as form expands
+                        const targetScroll = document.documentElement.scrollHeight - window.innerHeight;
+                        const scrollDelta = targetScroll - startScroll;
+
+                        window.scrollTo(0, startScroll + scrollDelta * ease);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animateScroll);
+                        }
+                    };
+
+                    requestAnimationFrame(animateScroll);
+
+                    setTimeout(() => {
+                        document.getElementById('name')?.focus();
+                    }, 600);
+                }
+            });
+
+            form?.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const nameInput = document.getElementById('name') as HTMLInputElement;
+                const companyInput = document.getElementById('company') as HTMLInputElement;
+                const emailInput = document.getElementById('email') as HTMLInputElement;
+
+                const nameError = nameInput?.parentElement?.querySelector('.error-message');
+                const companyError = companyInput?.parentElement?.querySelector('.error-message');
+                const emailError = emailInput?.parentElement?.querySelector('.error-message');
+
+                [nameError, companyError, emailError].forEach(el => el?.classList.add('hidden'));
+                [nameInput, companyInput, emailInput].forEach(el => { if (el) el.style.borderColor = ''; });
+
+                let isValid = true;
+
+                // Name validation
+                const nameValue = nameInput?.value.trim() || '';
+                if (!nameValue) {
+                    if (nameError) nameError.textContent = nameError.dataset.empty || '';
+                    nameError?.classList.remove('hidden');
+                    if (nameInput) nameInput.style.borderColor = '#f87171';
+                    isValid = false;
+                } else if (nameValue.length < 2) {
+                    if (nameError) nameError.textContent = nameError.dataset.invalid || '';
+                    nameError?.classList.remove('hidden');
+                    if (nameInput) nameInput.style.borderColor = '#f87171';
+                    isValid = false;
+                }
+
+                // Company validation
+                const companyValue = companyInput?.value.trim() || '';
+                if (!companyValue) {
+                    if (companyError) companyError.textContent = companyError.dataset.empty || '';
+                    companyError?.classList.remove('hidden');
+                    if (companyInput) companyInput.style.borderColor = '#f87171';
+                    isValid = false;
+                } else if (companyValue.length < 2) {
+                    if (companyError) companyError.textContent = companyError.dataset.invalid || '';
+                    companyError?.classList.remove('hidden');
+                    if (companyInput) companyInput.style.borderColor = '#f87171';
+                    isValid = false;
+                }
+
+                // Email validation
+                const emailValue = emailInput?.value.trim() || '';
+                const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+                const personalDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'icloud.com', 'mail.com', 'protonmail.com', 'zoho.com', 'yandex.com', 'gmx.com', 'live.com', 'msn.com'];
+
+                if (!emailValue) {
+                    if (emailError) emailError.textContent = emailError.dataset.empty || '';
+                    emailError?.classList.remove('hidden');
+                    if (emailInput) emailInput.style.borderColor = '#f87171';
+                    isValid = false;
+                } else if (!emailPattern.test(emailValue)) {
+                    if (emailError) emailError.textContent = emailError.dataset.invalid || '';
+                    emailError?.classList.remove('hidden');
+                    if (emailInput) emailInput.style.borderColor = '#f87171';
+                    isValid = false;
+                } else {
+                    const domain = emailValue.split('@')[1]?.toLowerCase();
+                    if (domain && personalDomains.includes(domain)) {
+                        if (emailError) emailError.textContent = emailError.dataset.personal || '';
+                        emailError?.classList.remove('hidden');
+                        if (emailInput) emailInput.style.borderColor = '#f87171';
+                        isValid = false;
+                    }
+                }
+
+                if (!isValid) return;
+
+                const formData = {
+                    name: nameInput?.value.trim(),
+                    company: companyInput?.value.trim(),
+                    email: emailInput?.value.trim()
+                };
+
+                // Disable all inputs during submission
+                const inputs = form.querySelectorAll('input');
+                inputs.forEach(input => input.setAttribute('disabled', 'true'));
+
+                const submitBtn = document.getElementById('submit-btn');
+                if (submitBtn) submitBtn.setAttribute('disabled', 'true');
+
+                // Show success state immediately
+                form.classList.add('hide');
+                successMessage?.classList.add('show');
+            });
+
+            document.querySelectorAll('#signup-form input').forEach(input => {
+                input.addEventListener('input', function (this: HTMLInputElement) {
+                    this.style.borderColor = '';
+                    const error = this.parentElement?.querySelector('.error-message');
+                    if (error) error.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</Layout>

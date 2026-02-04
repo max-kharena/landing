@@ -1,0 +1,176 @@
+---
+interface Props {
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseDuration?: number;
+}
+
+const {
+  typingSpeed = 50,
+  deletingSpeed = 35,
+  pauseDuration = 1800,
+} = Astro.props;
+---
+
+<div class="text-type-container">
+  <span class="line line-1"><span id="line1-text">T</span><span class="typing-cursor" id="cursor1">|</span></span>
+  <span class="line line-2"><span id="line2-text"></span><span class="typing-cursor" id="cursor2" style="display: none;">|</span></span>
+</div>
+
+<script>
+  const line1Text = document.getElementById('line1-text');
+  const line2Text = document.getElementById('line2-text');
+  const cursor1 = document.getElementById('cursor1');
+  const cursor2 = document.getElementById('cursor2');
+
+  if (line1Text && line2Text && cursor1 && cursor2) {
+    const typingSpeed = 18;
+    const deletingSpeed = 15;
+    const pauseDuration = 600;
+
+    const firstLine = 'Take control of your';
+    const typoWord = 'fyntech';
+    const correctWord = 'fintech';
+    const suffix = ' stack';
+
+    async function sleep(ms: number) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function updateLine2(text: string, showError: boolean = false) {
+      if (showError && text.length > 0) {
+        line2Text.innerHTML = `<span class="typo-underline">${text}</span>`;
+      } else {
+        line2Text.textContent = text;
+      }
+    }
+
+    function moveCursorToLine2() {
+      cursor1.style.display = 'none';
+      cursor2.style.display = 'inline-block';
+    }
+
+    async function runAnimation() {
+      // Phase 1: Type "Take control of your" (starting from "T")
+      for (let i = 1; i <= firstLine.length; i++) {
+        line1Text.textContent = firstLine.slice(0, i);
+        await sleep(typingSpeed + Math.random() * 15);
+      }
+
+      await sleep(150);
+      moveCursorToLine2();
+      await sleep(150);
+
+      // Phase 2: Type "fyntech" (typo)
+      for (let i = 0; i <= typoWord.length; i++) {
+        updateLine2(typoWord.slice(0, i), false);
+        await sleep(typingSpeed + Math.random() * 15);
+      }
+
+      // Phase 3: Show error underline on "fyntech" (quick appearance)
+      await sleep(80);
+      updateLine2(typoWord, true);
+      await sleep(pauseDuration);
+
+      // Phase 4: Delete "fyntech" back to "f" (keeping error underline while deleting)
+      for (let i = typoWord.length; i >= 1; i--) {
+        updateLine2(typoWord.slice(0, i), true);
+        await sleep(deletingSpeed);
+      }
+
+      // Remove error styling when we're down to "f"
+      updateLine2('f', false);
+      await sleep(150);
+
+      // Phase 5: Type "fintech stack" (correct text)
+      const fullCorrectText = correctWord + suffix;
+      for (let i = 1; i <= fullCorrectText.length; i++) {
+        updateLine2(fullCorrectText.slice(0, i), false);
+        await sleep(typingSpeed + Math.random() * 15);
+      }
+
+      // Animation complete - hide cursor
+      await sleep(500);
+      cursor2.style.opacity = '0';
+    }
+
+    // Start animation after a brief delay
+    setTimeout(runAnimation, 800);
+  }
+</script>
+
+<style>
+  .text-type-container {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.75rem, 8vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: var(--text-color);
+  }
+
+  .line {
+    display: block;
+  }
+
+  .line-2 {
+    min-height: 1.1em;
+    overflow: visible;
+    padding-bottom: 0.25em;
+  }
+
+  .typing-cursor {
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  :global(.typo-underline) {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  :global(.typo-underline)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 8'%3E%3Cpath d='M0 4 Q5 0, 10 4 T20 4' stroke='%23ef4444' stroke-width='2.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 20px 8px;
+    animation: waveAppear 0.2s ease-out;
+  }
+
+  @keyframes waveAppear {
+    from {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  /* Reduce motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .typing-cursor {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>
