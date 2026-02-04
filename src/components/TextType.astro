@@ -13,8 +13,8 @@ const {
 ---
 
 <div class="text-type-container">
-  <span class="line line-1"><span id="line1-text">T</span><span class="typing-cursor" id="cursor1">|</span></span>
-  <span class="line line-2"><span id="line2-text"></span><span class="typing-cursor" id="cursor2" style="display: none;">|</span></span>
+  <span class="line line-1"><span class="text-wrapper"><span id="line1-text">T</span><span class="typing-cursor" id="cursor1">|</span></span></span>
+  <span class="line line-2"><span class="text-wrapper"><span id="line2-text"></span><span class="typing-cursor" id="cursor2" style="display: none;">|</span></span></span>
 </div>
 
 <script>
@@ -107,22 +107,41 @@ const {
     line-height: 1.05;
     letter-spacing: -0.04em;
     color: var(--text-color);
+    text-align: center;
   }
 
   .line {
     display: block;
+    text-align: center;
+  }
+
+  .line-1 {
+    white-space: nowrap;
+    transform: translateX(-0.25em);
   }
 
   .line-2 {
     min-height: 1.1em;
     overflow: visible;
     padding-bottom: 0.25em;
+    text-align: center;
+  }
+
+  .line-2 .text-wrapper::before {
+    content: '\200b'; /* Zero-width space to maintain line height when empty */
+  }
+
+  .text-wrapper {
+    position: relative;
+    display: inline-block;
   }
 
   .typing-cursor {
+    position: absolute;
+    right: -0.5em;
+    top: 0;
     display: inline-block;
     animation: blink 1s step-end infinite;
-    margin-left: 2px;
     font-weight: 400;
     transition: opacity 0.3s ease;
   }
