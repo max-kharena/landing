@@ -178,7 +178,11 @@ function GradualBlur(props: GradualBlurProps) {
         transition:
           config.animated && config.animated !== 'scroll'
             ? `backdrop-filter ${config.duration} ${config.easing}`
-            : undefined
+            : undefined,
+        // GPU acceleration hints for smoother scroll
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        backfaceVisibility: 'hidden'
       };
 
       divs.push(<div key={i} style={divStyle} />);
@@ -198,6 +202,10 @@ function GradualBlur(props: GradualBlurProps) {
       opacity: isVisible ? 1 : 0,
       transition: config.animated ? `opacity ${config.duration} ${config.easing}` : undefined,
       zIndex: isPageTarget ? config.zIndex + 100 : config.zIndex,
+      // GPU layer promotion for fixed elements
+      transform: 'translateZ(0)',
+      willChange: 'transform',
+      backfaceVisibility: 'hidden',
       ...config.style
     };
 

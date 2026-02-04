@@ -5,6 +5,11 @@
   justify-content: center;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  /* GPU layer promotion for smoother scroll */
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .glass-surface__filter {
@@ -52,6 +57,14 @@
     inset 0 -1px 1px rgba(255, 255, 255, 0.05),
     0 4px 24px rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Reduce blur on mobile for better scroll performance */
+@media (max-width: 768px) {
+  .glass-surface--fallback {
+    backdrop-filter: blur(10px) saturate(1.5);
+    -webkit-backdrop-filter: blur(10px) saturate(1.5);
+  }
 }
 
 /* Hover effects */

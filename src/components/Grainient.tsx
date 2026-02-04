@@ -184,11 +184,15 @@ const Grainient = ({
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // Use lower DPR on mobile for better performance
+    const isMobile = window.innerWidth <= 768;
+    const targetDpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      dpr: targetDpr
     });
 
     const gl = renderer.gl;
@@ -253,7 +257,37 @@ const Grainient = ({
     const t0 = performance.now();
     const transitionSpeed = 0.03; // Smooth transition speed
 
+    // Throttle animation during scroll on mobile for better performance
+    let isScrolling = false;
+    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+    let lastFrameTime = 0;
+    const targetFps = isMobile ? 30 : 60; // Lower FPS on mobile
+    const frameInterval = 1000 / targetFps;
+
+    const handleScroll = () => {
+      if (!isMobile) return;
+      isScrolling = true;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 150);
+    };
+
+    if (isMobile) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
     const loop = (t: number) => {
+      // Skip frames during scroll on mobile, or throttle to target FPS
+      if (isMobile) {
+        const elapsed = t - lastFrameTime;
+        if (elapsed < frameInterval || isScrolling) {
+          raf = requestAnimationFrame(loop);
+          return;
+        }
+        lastFrameTime = t - (elapsed % frameInterval);
+      }
+
       (program.uniforms.iTime.value as number) = (t - t0) * 0.001;
 
       // Smoothly interpolate colors
@@ -285,6 +319,10 @@ const Grainient = ({
 
     return () => {
       cancelAnimationFrame(raf);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      if (isMobile) {
+        window.removeEventListener('scroll', handleScroll);
+      }
       ro.disconnect();
       programRef.current = null;
       try {

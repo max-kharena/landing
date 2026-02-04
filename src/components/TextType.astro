@@ -28,7 +28,7 @@ const {
     const deletingSpeed = 15;
     const pauseDuration = 600;
 
-    const firstLine = 'Take control of your';
+    const firstLine = 'Take back control of your';
     const typoWord = 'fyntech';
     const correctWord = 'fintech';
     const suffix = ' stack';
@@ -51,7 +51,7 @@ const {
     }
 
     async function runAnimation() {
-      // Phase 1: Type "Take control of your" (starting from "T")
+      // Phase 1: Type "Take back control of your" (starting from "T")
       for (let i = 1; i <= firstLine.length; i++) {
         line1Text.textContent = firstLine.slice(0, i);
         await sleep(typingSpeed + Math.random() * 15);
