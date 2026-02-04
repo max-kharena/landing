@@ -192,4 +192,34 @@ const {
       opacity: 0;
     }
   }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .line-1 {
+      transform: translateX(-0.15em);
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .line-1 {
+      white-space: normal;
+      transform: none;
+    }
+
+    .typing-cursor {
+      right: -0.4em;
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .text-type-container {
+      font-size: clamp(2rem, 10vw, 2.75rem);
+    }
+
+    .typing-cursor {
+      right: -0.3em;
+    }
+  }
 </style>
