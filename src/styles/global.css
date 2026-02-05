@@ -561,6 +561,12 @@ body {
     color: rgba(26, 26, 46, 0.5);
 }
 
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
 .success-state {
     display: none;
     flex-direction: column;

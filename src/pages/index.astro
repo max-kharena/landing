@@ -172,18 +172,17 @@ import '../styles/global.css';
                         <form id="signup-form" class="form-inner space-y-4 w-full" novalidate>
                             <div class="form-field">
                                 <label for="name" class="sr-only">Full Name</label>
-                                <input type="text" id="name" name="name" placeholder="Your name *" required minlength="2" autocomplete="name" class="form-input">
+                                <input type="text" id="name" name="name" placeholder="Eg. Jane Smith" required minlength="2" autocomplete="name" class="form-input">
                                 <p class="error-message text-xs mt-2 text-red-400 hidden" data-empty="Please enter your name" data-invalid="Name must be at least 2 characters">Please enter your name</p>
                             </div>
                             <div class="form-field">
-                                <label for="company" class="sr-only">Company</label>
-                                <input type="text" id="company" name="company" placeholder="Company *" required minlength="2" autocomplete="organization" class="form-input">
-                                <p class="error-message text-xs mt-2 text-red-400 hidden" data-empty="Please enter your company name" data-invalid="Company name must be at least 2 characters">Please enter your company name</p>
+                                <label for="email" class="sr-only">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="jane@company.com" required autocomplete="email" class="form-input">
+                                <p class="error-message text-xs mt-2 text-red-400 hidden" data-empty="Please enter your email" data-invalid="Please enter a valid email address" data-personal="Please use your work email">Please enter your email</p>
                             </div>
                             <div class="form-field">
-                                <label for="email" class="sr-only">Email Address</label>
-                                <input type="email" id="email" name="email" placeholder="Work email *" required autocomplete="email" class="form-input">
-                                <p class="error-message text-xs mt-2 text-red-400 hidden" data-empty="Please enter your email" data-invalid="Please enter a valid email address" data-personal="Please use your work email">Please enter your email</p>
+                                <label for="message" class="sr-only">Message</label>
+                                <textarea id="message" name="message" placeholder="Enter your message..." rows="4" class="form-input form-textarea"></textarea>
                             </div>
                             <GlassSurface
                                 client:load
@@ -299,15 +298,14 @@ import '../styles/global.css';
                 e.preventDefault();
 
                 const nameInput = document.getElementById('name') as HTMLInputElement;
-                const companyInput = document.getElementById('company') as HTMLInputElement;
                 const emailInput = document.getElementById('email') as HTMLInputElement;
+                const messageInput = document.getElementById('message') as HTMLTextAreaElement;
 
                 const nameError = nameInput?.parentElement?.querySelector('.error-message');
-                const companyError = companyInput?.parentElement?.querySelector('.error-message');
                 const emailError = emailInput?.parentElement?.querySelector('.error-message');
 
-                [nameError, companyError, emailError].forEach(el => el?.classList.add('hidden'));
-                [nameInput, companyInput, emailInput].forEach(el => { if (el) el.style.borderColor = ''; });
+                [nameError, emailError].forEach(el => el?.classList.add('hidden'));
+                [nameInput, emailInput].forEach(el => { if (el) el.style.borderColor = ''; });
 
                 let isValid = true;
 
@@ -322,20 +320,6 @@ import '../styles/global.css';
                     if (nameError) nameError.textContent = nameError.dataset.invalid || '';
                     nameError?.classList.remove('hidden');
                     if (nameInput) nameInput.style.borderColor = '#f87171';
-                    isValid = false;
-                }
-
-                // Company validation
-                const companyValue = companyInput?.value.trim() || '';
-                if (!companyValue) {
-                    if (companyError) companyError.textContent = companyError.dataset.empty || '';
-                    companyError?.classList.remove('hidden');
-                    if (companyInput) companyInput.style.borderColor = '#f87171';
-                    isValid = false;
-                } else if (companyValue.length < 2) {
-                    if (companyError) companyError.textContent = companyError.dataset.invalid || '';
-                    companyError?.classList.remove('hidden');
-                    if (companyInput) companyInput.style.borderColor = '#f87171';
                     isValid = false;
                 }
 
@@ -368,8 +352,8 @@ import '../styles/global.css';
 
                 const formData = {
                     name: nameInput?.value.trim(),
-                    company: companyInput?.value.trim(),
-                    email: emailInput?.value.trim()
+                    email: emailInput?.value.trim(),
+                    message: messageInput?.value.trim()
                 };
 
                 // Disable all inputs during submission
