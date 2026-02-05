@@ -15,6 +15,19 @@
     --glass-border: rgba(255, 255, 255, 0.08);
 }
 
+[data-theme="light"] {
+    --gradient-start: #f0a875;
+    --gradient-mid: #e87ea0;
+    --gradient-end: #c66db8;
+    --bg-color: #faf7f5;
+    --text-color: #1a1a2e;
+    --text-muted: rgba(26, 26, 46, 0.6);
+    --border-color: rgba(26, 26, 46, 0.08);
+    --border-hover: rgba(26, 26, 46, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.5);
+    --glass-border: rgba(26, 26, 46, 0.08);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -538,6 +551,10 @@ body {
     color: rgba(255, 255, 255, 0.75);
 }
 
+[data-theme="light"] .form-input::placeholder {
+    color: rgba(26, 26, 46, 0.5);
+}
+
 .success-state {
     display: none;
     flex-direction: column;
@@ -924,22 +941,9 @@ body {
     transform: translateX(4px);
 }
 
-/* CTA Arrow icon with animated gradient glow */
+/* CTA Arrow icon */
 .cta-arrow-icon {
-    filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.6)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
-    animation: arrow-glow 4s ease-in-out infinite;
-}
-
-@keyframes arrow-glow {
-    0%, 100% {
-        filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.6)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
-    }
-    33% {
-        filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 12px rgba(240, 171, 252, 0.4));
-    }
-    66% {
-        filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6)) drop-shadow(0 0 12px rgba(0, 245, 255, 0.4));
-    }
+    filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.6));
 }
 
 /* Submit Button GlassSurface */
@@ -1061,4 +1065,70 @@ body {
         backdrop-filter: blur(4px) !important;
         -webkit-backdrop-filter: blur(4px) !important;
     }
+}
+
+/* ===== Light Theme Overrides ===== */
+
+/* Text colors in light mode */
+[data-theme="light"] .coming-soon-badge .glass-surface__content,
+[data-theme="light"] .cta-btn-inner,
+[data-theme="light"] .submit-btn-inner,
+[data-theme="light"] .logo-svg {
+    color: var(--text-color) !important;
+}
+
+
+/* Theme toggle button */
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.theme-toggle-btn .sun-icon {
+    display: none;
+}
+
+.theme-toggle-btn .moon-icon {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle-btn .sun-icon {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle-btn .moon-icon {
+    display: none;
+}
+
+/* Theme toggle glass wrapper */
+.theme-toggle-glass {
+    display: inline-flex !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.theme-toggle-glass .glass-surface__content {
+    padding: 0;
 }
