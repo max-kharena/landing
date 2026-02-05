@@ -3,4 +3,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  /* GPU layer promotion for continuous animation during scroll */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: contents;
 }
