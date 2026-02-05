@@ -517,16 +517,22 @@ body {
 
 /* Form styles */
 .form-container {
-    max-height: 0;
-    overflow: hidden;
     opacity: 0;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-10px) scale(0.98);
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+    will-change: transform, opacity;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
 .form-container.open {
-    max-height: 400px;
     opacity: 1;
-    margin-top: 2rem;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    height: auto;
+    overflow: visible;
+    margin-top: 1.5rem;
 }
 
 .form-input {
@@ -537,9 +543,9 @@ body {
     color: var(--text-color);
     background: var(--glass-bg);
     border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border-radius: 12px;
     outline: none;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-input:focus {
@@ -808,10 +814,10 @@ body {
 .status-dot {
     width: 6px;
     height: 6px;
-    background: #4ade80;
+    background: #f59e0b;
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
-    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
 }
 
 @keyframes pulse {
@@ -844,6 +850,21 @@ body {
     .coming-soon-badge .glass-surface__content,
     .logo-badge .glass-surface__content {
         text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Light mode: same as desktop */
+    [data-theme="light"] .coming-soon-badge,
+    [data-theme="light"] .logo-badge {
+        background: rgba(255, 255, 255, 0.06) !important;
+        box-shadow:
+            inset 0 1px 1px rgba(255, 255, 255, 0.1),
+            inset 0 -1px 1px rgba(255, 255, 255, 0.05),
+            0 4px 24px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    [data-theme="light"] .coming-soon-badge .glass-surface__content,
+    [data-theme="light"] .logo-badge .glass-surface__content {
+        text-shadow: none;
     }
 }
 
@@ -886,6 +907,7 @@ body {
     width: 100% !important;
     height: auto !important;
     border-radius: 22px !important;
+    overflow: visible !important;
     box-shadow:
         inset 0 1px 1px rgba(255, 255, 255, 0.1),
         inset 0 -1px 1px rgba(255, 255, 255, 0.05),
@@ -904,7 +926,7 @@ body {
     padding: 24px 32px;
     flex-direction: column;
     align-items: stretch;
-    border-radius: 22px;
+    border-radius: 21px;
 }
 
 /* CTA Button GlassSurface */
@@ -951,10 +973,13 @@ body {
     width: 100% !important;
     margin-top: 0.5rem;
     cursor: pointer;
+    border-radius: 12px !important;
+    overflow: hidden !important;
 }
 
 .submit-btn-glass .glass-surface__content {
     padding: 0;
+    border-radius: 12px;
 }
 
 .submit-btn-inner {

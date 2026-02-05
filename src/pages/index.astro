@@ -137,7 +137,7 @@ import '../styles/global.css';
                 </p>
 
                 <!-- CTA Button -->
-                <div class="flex items-center justify-center mt-10 md:mt-12">
+                <div class="flex items-center justify-center mt-6 md:mt-8">
                     <GlassSurface
                         client:load
                         width="auto"
@@ -266,7 +266,7 @@ import '../styles/global.css';
                     }
 
                     // Animate scroll alongside form expansion
-                    const duration = 500;
+                    const duration = 250;
                     const startTime = performance.now();
                     const startScroll = window.scrollY;
 
@@ -291,7 +291,7 @@ import '../styles/global.css';
 
                     setTimeout(() => {
                         document.getElementById('name')?.focus();
-                    }, 600);
+                    }, 300);
                 }
             });
 
