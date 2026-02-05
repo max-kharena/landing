@@ -114,6 +114,13 @@ body {
     letter-spacing: -0.01em;
 }
 
+@media (min-width: 1024px) {
+    .subheadline {
+        max-width: none;
+        white-space: nowrap;
+    }
+}
+
 
 /* Logo */
 .logo {
@@ -917,13 +924,13 @@ body {
     transform: translateX(4px);
 }
 
-/* CTA Sparkle icon with animated gradient glow */
-.cta-sparkle-icon {
+/* CTA Arrow icon with animated gradient glow */
+.cta-arrow-icon {
     filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.6)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
-    animation: sparkle-glow 4s ease-in-out infinite;
+    animation: arrow-glow 4s ease-in-out infinite;
 }
 
-@keyframes sparkle-glow {
+@keyframes arrow-glow {
     0%, 100% {
         filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.6)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
     }

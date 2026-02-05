@@ -18,7 +18,7 @@ import '../styles/global.css';
         <!-- Grainient Background -->
         <div class="grainient-bg" aria-hidden="true">
             <Grainient
-                client:load
+                client:idle
                 color1="#000000"
                 color2="#758cff"
                 color3="#2f23d1"
@@ -47,7 +47,7 @@ import '../styles/global.css';
 
         <!-- Header blur effect -->
         <GradualBlur
-            client:load
+            client:idle
             position="top"
             target="page"
             height="5rem"
@@ -133,9 +133,9 @@ import '../styles/global.css';
                     >
                         <button id="cta-btn" class="cta-btn-inner" aria-expanded="false" aria-controls="waitlist-form">
                             <span>Request access</span>
-                            <svg class="w-5 h-5 cta-sparkle-icon" fill="none" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 cta-arrow-icon" fill="none" viewBox="0 0 24 24">
                                 <defs>
-                                    <linearGradient id="sparkle-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                         <stop offset="0%" stop-color="#00f5ff">
                                             <animate attributeName="stop-color" values="#00f5ff;#a855f7;#f0abfc;#38bdf8;#00f5ff" dur="4s" repeatCount="indefinite" />
                                         </stop>
@@ -147,7 +147,7 @@ import '../styles/global.css';
                                         </stop>
                                     </linearGradient>
                                 </defs>
-                                <path stroke="url(#sparkle-gradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+                                <path stroke="url(#arrow-gradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
                         </button>
                     </GlassSurface>
