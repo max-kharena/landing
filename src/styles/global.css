@@ -971,7 +971,13 @@ body {
 
 /* CTA Arrow icon */
 .cta-arrow-icon {
-    filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.6));
+    color: rgba(255, 255, 255, 0.7);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+}
+
+[data-theme="light"] .cta-arrow-icon {
+    color: rgba(26, 26, 46, 0.6);
+    filter: drop-shadow(0 0 3px rgba(26, 26, 46, 0.1));
 }
 
 /* Submit Button GlassSurface */
